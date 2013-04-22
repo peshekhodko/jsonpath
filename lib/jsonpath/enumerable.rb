@@ -81,7 +81,7 @@ class JsonPath
     def yield_value(blk, context, key)
       case @mode
       when nil
-        blk.call(key ? context[key] : context)
+        blk.call(key ? {key=>context[key]} : {'root'=>context})
       when :compact
         context.delete(key) if key && context[key].nil?
       when :delete
